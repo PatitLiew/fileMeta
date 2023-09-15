@@ -34,7 +34,16 @@ app.listen(port, function () {
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
-  // Handle the uploaded file
-  res.json({ message: 'File uploaded successfully!' });
+    // Access file attributes
+  const fileName = req.file.originalname;
+  const fileType = req.file.mimetype;
+  const fileSize = req.file.size;
+
+  // Respond with the attributes in a JSON response
+  res.json({
+    fileName: fileName,
+    fileType: fileType,
+    fileSize: fileSize,
+  });
 })
 
